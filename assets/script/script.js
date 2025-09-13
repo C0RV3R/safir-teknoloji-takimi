@@ -1,4 +1,3 @@
-// Navigasyon için parçacık animasyonu
 const navCanvas = document.getElementById('nav-particles');
 if (navCanvas) {
     const ctx = navCanvas.getContext('2d');
@@ -56,7 +55,6 @@ if (navCanvas) {
     animateParticles();
 }
 
-// Scroll ile header efekti
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (window.scrollY > 50) {
@@ -66,7 +64,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Yıldızlı arka plan animasyonu
 const canvas = document.getElementById('stars');
 if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -136,7 +133,6 @@ if (canvas) {
     animateStars();
 }
 
-// Mobil menü toggle
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -147,7 +143,6 @@ if (menuToggle && navLinks) {
     });
 }
 
-// Form gönderimi
 const contactForm = document.getElementById('contact-form');
 const formMessage = document.getElementById('form-message');
 if (contactForm) {
@@ -174,7 +169,6 @@ if (contactForm) {
     });
 }
 
-// Yumuşak kaydırma ve aktif navigasyon
 document.querySelectorAll('.nav-links a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -190,7 +184,6 @@ document.querySelectorAll('.nav-links a').forEach(anchor => {
     });
 });
 
-// Aktif sayfa vurgusu
 const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-links a').forEach(link => {
     const linkPath = link.getAttribute('href').split('/').pop() || 'index.html';
@@ -199,7 +192,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     }
 });
 
-// Görünüm animasyonları için Intersection Observer
 const animateOnScroll = (elements, animationClass) => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -239,8 +231,6 @@ document.head.appendChild(style);
 });
 
 
-
-// Klavye navigasyonu için kart tıklama
 [projectCards, teamCards].forEach(cardGroup => {
     cardGroup.forEach(card => {
         card.addEventListener('keydown', (e) => {
@@ -251,3 +241,36 @@ document.head.appendChild(style);
         });
     });
 });
+
+        const name = localStorage.getItem("preview_name") || "Belirtilmedi";
+        const email = localStorage.getItem("preview_email") || "Belirtilmedi";
+        const message = localStorage.getItem("preview_message") || "Belirtilmedi";
+
+        document.getElementById("preview-name").textContent = name;
+        document.getElementById("preview-email").textContent = email;
+        document.getElementById("preview-message").textContent = message;
+        window.addEventListener("beforeunload", () => {
+            localStorage.removeItem("preview_name");
+            localStorage.removeItem("preview_email");
+            localStorage.removeItem("preview_message");
+        });
+
+                document.getElementById("contact-form").addEventListener("submit", function (e) {
+            
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const message = document.querySelector('textarea[name="message"]').value;
+
+           
+            localStorage.setItem("preview_name", name);
+            localStorage.setItem("preview_email", email);
+            localStorage.setItem("preview_message", message);
+
+            
+            setTimeout(() => {
+                const confirmPreview = confirm("Mesajınız gönderildi. Önizlemek ister misiniz?");
+                if (confirmPreview) {
+                    window.location.href = "preview.html";
+                }
+            }, 100); 
+        });
