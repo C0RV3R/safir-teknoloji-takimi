@@ -29,23 +29,15 @@
 
     <section class="contact">
         <h2>Bize Ulaşın</h2>
-
-        <!-- ✅ AJAX ile çalışacak form -->
         <form id="contact-form" aria-label="İletişim formu">
             <input type="text" name="name" placeholder="Adınız" required aria-label="Adınız">
             <input type="email" name="email" placeholder="E-posta" required aria-label="E-posta adresiniz">
             <textarea name="message" placeholder="Mesajınız" required aria-label="Mesajınız"></textarea>
-
             <button type="submit" class="cta-button" aria-label="Mesaj gönder">Mesaj Gönder</button>
         </form>
 
-        <!-- ✅ Başarı mesajı + önizleme seçimi -->
-        <div id="preview-box" class="preview-prompt">
-            <p>✅ Mesaj başarıyla gönderildi. Önizlemek ister misiniz?</p>
-            <div class="preview-buttons">
-                <span id="yes-preview" title="Evet">✔️</span>
-                <span id="no-preview" title="Hayır">❌</span>
-            </div>
+        <div id="preview-box" class="preview-prompt" style="display: none;">
+            <p>✅ Mesajınız e-posta uygulamasına yönlendirildi.</p>
         </div>
     </section>
 

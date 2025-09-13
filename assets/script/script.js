@@ -241,54 +241,20 @@ document.head.appendChild(style);
         });
     });
 });
-        document.getElementById("contact-form").addEventListener("submit", async function (e) {
-            e.preventDefault(); // Sayfa yönlenmesini engelle
+ 
+document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault(); 
 
-            const form = e.target;
-            const name = form.name.value;
-            const email = form.email.value;
-            const message = form.message.value;
+    const name = this.elements["name"].value.trim();
+    const email = this.elements["email"].value.trim();
+    const message = this.elements["message"].value.trim();
 
-            // Form verilerini sakla (önizleme için)
-            localStorage.setItem("preview_name", name);
-            localStorage.setItem("preview_email", email);
-            localStorage.setItem("preview_message", message);
+    const subject = encodeURIComponent("İletişim Formu - Safir Teknoloji Takımı");
+    const body = encodeURIComponent(
+        `Ad: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`
+    );
 
-            // Form verisini FormSubmit API'sine gönder
-            try {
-                const response = await fetch("https://formsubmit.co/ajax/safirteknolojitakimi@gmail.com", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        message: message,
-                        _captcha: false,
-                        _honey: ""
-                    })
-                });
+    const mailtoLink = `mailto:safirteknoloji@takim.com?subject=${subject}&body=${body}`;
 
-                if (response.ok) {
-                    // Başarıyla gönderildiyse formu temizle ve mesaj kutusunu göster
-                    form.reset();
-                    document.getElementById("preview-box").style.display = "block";
-                } else {
-                    alert("Bir hata oluştu. Lütfen tekrar deneyin.");
-                }
-            } catch (error) {
-                alert("Sunucuya ulaşılamadı.");
-            }
-        });
-
-        // ✔️ Önizleme aç
-        document.getElementById("yes-preview").addEventListener("click", function () {
-            window.location.href = "preview.html";
-        });
-
-        // ❌ Kapat
-        document.getElementById("no-preview").addEventListener("click", function () {
-            document.getElementById("preview-box").style.display = "none";
-        });
+    window.location.href = mailtoLink;
+});
