@@ -30,18 +30,23 @@
     <section class="contact">
         <h2>Bize Ulaşın</h2>
 
-        <form action="https://formsubmit.co/safirteknolojitakimi@gmail.com" method="POST" id="contact-form" aria-label="İletişim formu">
+        <!-- ✅ AJAX ile çalışacak form -->
+        <form id="contact-form" aria-label="İletişim formu">
             <input type="text" name="name" placeholder="Adınız" required aria-label="Adınız">
             <input type="email" name="email" placeholder="E-posta" required aria-label="E-posta adresiniz">
             <textarea name="message" placeholder="Mesajınız" required aria-label="Mesajınız"></textarea>
 
-            <input type="text" name="_honey" style="display:none">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://example.com/dummy-success.html">
-
             <button type="submit" class="cta-button" aria-label="Mesaj gönder">Mesaj Gönder</button>
-            <div class="form-message" id="form-message"></div>
         </form>
+
+        <!-- ✅ Başarı mesajı + önizleme seçimi -->
+        <div id="preview-box" class="preview-prompt">
+            <p>✅ Mesaj başarıyla gönderildi. Önizlemek ister misiniz?</p>
+            <div class="preview-buttons">
+                <span id="yes-preview" title="Evet">✔️</span>
+                <span id="no-preview" title="Hayır">❌</span>
+            </div>
+        </div>
     </section>
 
     <footer>
@@ -61,7 +66,7 @@
             </div>
             <div class="footer-section">
                 <h3>İletişim</h3>
-                <p>E-posta: safirteknolojitakimi@gmail.com</p>
+                <p>E-posta: safirteknoloji@takim.com (henüz aktif değil)</p>
             </div>
         </div>
         <div class="footer-bottom">

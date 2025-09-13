@@ -652,3 +652,31 @@ footer {
     text-shadow: none;
   }
 }
+        .preview-prompt {
+            display: none;
+            margin-top: 20px;
+            background-color: #e0ffe0;
+            padding: 20px;
+            border: 2px solid #a3d9a5;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .preview-prompt p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #2a4d2e;
+        }
+
+        .preview-buttons {
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .preview-buttons span {
+            margin: 0 20px;
+        }
+
+        .hidden {
+            display: none;
+        }

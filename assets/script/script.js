@@ -241,36 +241,54 @@ document.head.appendChild(style);
         });
     });
 });
+        document.getElementById("contact-form").addEventListener("submit", async function (e) {
+            e.preventDefault(); // Sayfa yönlenmesini engelle
 
-        const name = localStorage.getItem("preview_name") || "Belirtilmedi";
-        const email = localStorage.getItem("preview_email") || "Belirtilmedi";
-        const message = localStorage.getItem("preview_message") || "Belirtilmedi";
+            const form = e.target;
+            const name = form.name.value;
+            const email = form.email.value;
+            const message = form.message.value;
 
-        document.getElementById("preview-name").textContent = name;
-        document.getElementById("preview-email").textContent = email;
-        document.getElementById("preview-message").textContent = message;
-        window.addEventListener("beforeunload", () => {
-            localStorage.removeItem("preview_name");
-            localStorage.removeItem("preview_email");
-            localStorage.removeItem("preview_message");
-        });
-
-                document.getElementById("contact-form").addEventListener("submit", function (e) {
-            
-            const name = document.querySelector('input[name="name"]').value;
-            const email = document.querySelector('input[name="email"]').value;
-            const message = document.querySelector('textarea[name="message"]').value;
-
-           
+            // Form verilerini sakla (önizleme için)
             localStorage.setItem("preview_name", name);
             localStorage.setItem("preview_email", email);
             localStorage.setItem("preview_message", message);
 
-            
-            setTimeout(() => {
-                const confirmPreview = confirm("Mesajınız gönderildi. Önizlemek ister misiniz?");
-                if (confirmPreview) {
-                    window.location.href = "preview.html";
+            // Form verisini FormSubmit API'sine gönder
+            try {
+                const response = await fetch("https://formsubmit.co/ajax/safirteknolojitakimi@gmail.com", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        message: message,
+                        _captcha: false,
+                        _honey: ""
+                    })
+                });
+
+                if (response.ok) {
+                    // Başarıyla gönderildiyse formu temizle ve mesaj kutusunu göster
+                    form.reset();
+                    document.getElementById("preview-box").style.display = "block";
+                } else {
+                    alert("Bir hata oluştu. Lütfen tekrar deneyin.");
                 }
-            }, 100); 
+            } catch (error) {
+                alert("Sunucuya ulaşılamadı.");
+            }
+        });
+
+        // ✔️ Önizleme aç
+        document.getElementById("yes-preview").addEventListener("click", function () {
+            window.location.href = "preview.html";
+        });
+
+        // ❌ Kapat
+        document.getElementById("no-preview").addEventListener("click", function () {
+            document.getElementById("preview-box").style.display = "none";
         });
