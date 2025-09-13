@@ -254,7 +254,7 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
         `Ad: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`
     );
 
-    const mailtoLink = `mailto:safirteknoloji@takim.com?subject=${subject}&body=${body}`;
+    const mailtoLink = `mailto:safirteknolojiatkimi@gmail.com?subject=${subject}&body=${body}`;
 
     window.location.href = mailtoLink;
 });
